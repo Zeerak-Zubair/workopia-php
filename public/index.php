@@ -5,8 +5,7 @@
 //php -S localhost -t public
 
 //We pasted the css and images folders in the public directory as well
-require '../views/home.view.php';
-require basePath('views/home.view.php');
 require '../helper.php';
-
+//require basePath('views/home.view.php');
+loadView('home');
 ?>
