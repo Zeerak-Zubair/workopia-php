@@ -11,9 +11,10 @@ class Database{
         $dsn = "mysql:host={$config['host']};port={$config['port']};dbname={$config['dbname']};charset=utf8";
         
         //to throw exceptions and throw errors
+        //vary between `PDO::FETCH_ASSOC` & ``
         $options = [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ
         ];
 
         try{

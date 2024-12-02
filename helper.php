@@ -19,13 +19,14 @@
   * @param mixed $name
   * @return void
   */
- function loadView($name){
+ function loadView($name, $data = []){
    $viewPath = basePath("views/{$name}.view.php");
 
    //inspectAndDie($name);
    //inspect($viewPath);
 
    if(file_exists($viewPath)){
+      extract($data);
       require $viewPath;
    }
    else echo $name .'.view.php View does not exist! <br/>';
@@ -70,5 +71,8 @@
   echo '</pre>';
  }
 
+ function formatSalary($salary){
+  return '$' . number_format(floatval($salary));
+ }
 
 ?>
