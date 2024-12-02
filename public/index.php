@@ -13,8 +13,8 @@ require basePath('Router.php');
 
 //To create the PDO
 require basePath('Database.php');
-$config = require basePath('config/db.php');
-$db = new Database($config);
+// $config = require basePath('config/db.php');
+// $db = new Database($config);
 
 //Instantiating the Router class
 $router = new Router();

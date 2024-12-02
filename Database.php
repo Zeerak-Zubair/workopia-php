@@ -12,7 +12,8 @@ class Database{
         
         //to throw exceptions and throw errors
         $options = [
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
         ];
 
         try{
@@ -23,6 +24,22 @@ class Database{
         }
     }
 
+    /**
+     * Query the Database
+     * @param string $query
+     * 
+     * @return PDOStatement
+     * @throws PDOException
+     */
+    public function query($query){
+        try{
+            $sth = $this->conn->prepare($query);
+            $sth->execute();
+            return $sth;
+        }catch(PDOException $e){
+            throw new Exception("Query failed to execue: {$e->getMessage()}");
+        }
+    }
 
 }
 
