@@ -41,7 +41,7 @@
    $partialPath = basePath("views/partials/{$name}.php");
    if(file_exists($partialPath)){
     require $partialPath;
-    }
+   }
     else echo $name . '.php Partial does not exist! <br/>';
  }
 
