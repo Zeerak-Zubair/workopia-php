@@ -1,5 +1,11 @@
 <?php
 
+namespace Framework;
+
+use PDO;
+use PDOException;
+use Exception;
+
 class Database{
     public $conn;
 
@@ -25,7 +31,9 @@ class Database{
         }
     }
 
-    /**
+    //inspectAndDie($uri);// `http:localhost:8000/listing?id=2` -> string(8) "/listing"
+
+    /*
      * Query the Database
      * @param string $query
      * 

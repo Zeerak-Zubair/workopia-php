@@ -12,15 +12,40 @@
     //     require basePath($routes['404']);
     // }
 
+    namespace Framework;
+
     class Router{
         protected $routes = [];
 
-        private function registerRoute($method, $uri, $controller){
+        // private function registerRoute($method, $uri, $controller){
+            // $this->routes[] = [
+            //     'method' => $method,
+            //     'uri' => $uri,
+            //     'controller' => $controller
+            // ];
+        // }
+
+        /**
+         * Register a Route
+         * @param mixed $method
+         * @param mixed $uri
+         * @param mixed $action
+         * @return void
+         */
+        public function registerRoute($method, $uri, $action){
+            list($controller, $controllerMethod) = explode('@',$action);
+            //inspectAndDie($arr);
+            
+            //inspect($controller);
+            //inspectAndDie($controllerMethod);
+
             $this->routes[] = [
                 'method' => $method,
                 'uri' => $uri,
-                'controller' => $controller
+                'controller' => $controller,
+                'controllerMethod' => $controllerMethod
             ];
+            
         }
 
         /**
@@ -73,7 +98,17 @@
         public function route($uri, $method){
             foreach($this->routes as $route){
                 if($route['uri'] === $uri && $route['method'] === $method){
-                    require basePath('App/' .$route['controller']);
+
+                    //Extract the controller and its method
+                    $controller = 'App\\Controllers\\' . $route['controller'];
+                    $controllerMethod = $route['controllerMethod'];
+
+                    //inspect($controller);
+                    //inspect($controllerMethod);
+
+                    //Instantiate the controller and the method
+                    $controllerInstance = new $controller();
+                    $controllerInstance->$controllerMethod(); 
                     return;
                 }
             }

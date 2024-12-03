@@ -1,0 +1,16 @@
+{
+    "name": "zeerak-zubair/workopia-php",
+    "description": "Job Listing Applications",
+    "author": [
+        {
+            "name" : "Zeerak Zubair",
+            "email": "zeerakzubair047@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Framework\\" : "Framework/",
+            "App\\" : "App/"
+        }
+    }
+}

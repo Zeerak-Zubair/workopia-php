@@ -1,26 +1,23 @@
 <?php
 
-//We have moved the index.php to the public directory
-//We aim to change the project root directory
-//php -S localhost -t public
+//Similar to npm
+//where packages are stored in node_modules
 
-//We pasted the css and images folders in the public directory as well
-
+//In composer for php 
+//The modules are stored in `vendor`
+require __DIR__.'/../vendor/autoload.php';
 require '../helper.php';
 
-//Necessary to create the Router object
-//require basePath('Framework/Router.php');
 
-//To create the PDO
-//require basePath('Framework/Database.php');
+use Framework\Router;
 
 //custom autoloader
-spl_autoload_register(function($class){
-    $path = basePath('Framework/' . $class . '.php');
-    if(file_exists($path)){
-        require $path;
-    }
-});
+// spl_autoload_register(function($class){
+//     $path = basePath('Framework/' . $class . '.php');
+//     if(file_exists($path)){
+//         require $path;
+//     }
+// });
 
 //Instantiating the Router class
 $router = new Router();
@@ -31,6 +28,7 @@ $routes = require basePath('routes.php');
 //obtaining the URI
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 //inspectAndDie($uri);// `http:localhost:8000/listing?id=2` -> string(8) "/listing"
+
 //obtaining the REQUEST METHOD
 $method = $_SERVER['REQUEST_METHOD'];
 
