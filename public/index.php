@@ -9,10 +9,10 @@
 require '../helper.php';
 
 //Necessary to create the Router object
-require basePath('Router.php');
+require basePath('Framework/Router.php');
 
 //To create the PDO
-require basePath('Database.php');
+require basePath('Framework/Database.php');
 // $config = require basePath('config/db.php');
 // $db = new Database($config);
 
