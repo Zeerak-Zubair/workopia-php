@@ -9,12 +9,18 @@
 require '../helper.php';
 
 //Necessary to create the Router object
-require basePath('Framework/Router.php');
+//require basePath('Framework/Router.php');
 
 //To create the PDO
-require basePath('Framework/Database.php');
-// $config = require basePath('config/db.php');
-// $db = new Database($config);
+//require basePath('Framework/Database.php');
+
+//custom autoloader
+spl_autoload_register(function($class){
+    $path = basePath('Framework/' . $class . '.php');
+    if(file_exists($path)){
+        require $path;
+    }
+});
 
 //Instantiating the Router class
 $router = new Router();
