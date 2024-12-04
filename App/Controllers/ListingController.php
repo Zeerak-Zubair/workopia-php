@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 use Framework\Database;
+use Framework\Validation;
+
 class ListingController{
 
     protected $db;
@@ -13,6 +15,9 @@ class ListingController{
     }
 
     public function index(){
+        //inspectAndDie(Validation::email('john@example.com'));
+        inspectAndDie(Validation::match('zayyan','zayyan'));
+
         $listings = $this->db->query('SELECT * FROM workopia.listings')->fetchAll();
         loadView('listings/index', [
             'listings' => $listings
