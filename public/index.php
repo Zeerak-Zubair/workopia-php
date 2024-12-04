@@ -30,9 +30,9 @@ $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 //inspectAndDie($uri);// `http:localhost:8000/listing?id=2` -> string(8) "/listing"
 
 //obtaining the REQUEST METHOD
-$method = $_SERVER['REQUEST_METHOD'];
+//$method = $_SERVER['REQUEST_METHOD'];
 
 //Routing the requested URI and Method
-$router->route($uri,$method);
+$router->route($uri);
 
 ?>

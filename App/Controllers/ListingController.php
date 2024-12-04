@@ -14,7 +14,7 @@ class ListingController{
 
     public function index(){
         $listings = $this->db->query('SELECT * FROM workopia.listings')->fetchAll();
-        loadView('home', [
+        loadView('listings/index', [
             'listings' => $listings
         ]);
     }
@@ -23,8 +23,8 @@ class ListingController{
         loadView('listings/create');
     }
 
-    public function show() {
-        $id = $_GET['id'] ?? '';
+    public function show($params) {
+        $id = $params['id'] ?? '';
         //inspect($id); 
 
         $params = [
@@ -32,7 +32,11 @@ class ListingController{
         ];
 
         $listing = $this->db->query('SELECT * FROM workopia.listings WHERE id = :id',$params)->fetch();
-
+        
+        if(!$listing){
+            ErrorController::notFound('Listing Not Found');
+            return;
+        }
         //inspect($listing);
 
         loadView('listings/show', [ 'listing' => $listing ] );
