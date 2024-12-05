@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 //Similar to npm
 //where packages are stored in node_modules
 

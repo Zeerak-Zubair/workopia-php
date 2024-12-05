@@ -75,4 +75,23 @@
   return '$' . number_format(floatval($salary));
  }
 
+ /**
+  * Sanitize data
+  * @param string $dirty
+  * @return void
+  */
+ function sanitize($dirty){
+  return filter_var(trim($dirty), FILTER_SANITIZE_SPECIAL_CHARS);
+ }
+
+ /**
+  * Redirect to the provided url
+  * @param mixed $url
+  * @return void
+  */
+  function redirect($url)
+  {
+    header("Location: {$url}");
+    exit;
+  }
 ?>

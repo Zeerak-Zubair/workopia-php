@@ -100,6 +100,15 @@ class Router{
 
         $requestMethod = $_SERVER['REQUEST_METHOD'];
 
+        //Check for hidden request method
+
+        if($requestMethod === 'POST' && isset($_POST['_method'])){
+            //Override the request method
+            
+            $requestMethod = strtoupper($_POST['_method']);
+            //inspectAndDie($requestMethod);
+        }
+
         foreach($this->routes as $route){
 
             //Split the URI into segments
