@@ -21,6 +21,8 @@ $router->put('/listings/{id}','ListingController@update');
 $router->get('/auth/register','UserController@create');
 $router->get('/auth/login','UserController@login');
 $router->post('/auth/register', 'UserController@store');
+$router->post('/auth/logout','UserController@logout');
+
 //Populating the routes array in the $router object 
 // $router->get('/','controllers/home.php');
 // $router->get('/listings','controllers/listings/index.php');
