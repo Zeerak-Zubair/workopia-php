@@ -41,6 +41,9 @@ class Validation{
         $value1 = trim($value1);
         $value2 = trim($value2);
 
+        //inspect($value1);
+        //inspect($value2);
+
         return $value1 === $value2;
     }
 

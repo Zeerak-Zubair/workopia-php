@@ -38,9 +38,10 @@
   * @param mixed $name
   * @return string
   */
- function loadPartial($name){
+ function loadPartial($name, $errors = []){
    $partialPath = basePath("App/views/partials/{$name}.php");
    if(file_exists($partialPath)){
+    extract($errors);
     require $partialPath;
    }
     else echo $name . '.php Partial does not exist! <br/>';

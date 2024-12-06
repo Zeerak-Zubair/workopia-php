@@ -1,6 +1,6 @@
 <?php
 
-session_start();
+//session_start();
 
 //Similar to npm
 //where packages are stored in node_modules
@@ -8,10 +8,16 @@ session_start();
 //In composer for php 
 //The modules are stored in `vendor`
 require __DIR__.'/../vendor/autoload.php';
-require '../helper.php';
 
 
 use Framework\Router;
+use Framework\Session;
+
+Session::start();
+
+require '../helper.php';
+
+//inspectAndDie(session_status());
 
 //custom autoloader
 // spl_autoload_register(function($class){
