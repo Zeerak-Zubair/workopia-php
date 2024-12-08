@@ -22,7 +22,7 @@ class Authorise{
      * @return void
      */
     public function handle($role){
-        inspect($role);
+        //inspect($role);
 
         if($role === 'guest' && $this->isAuthenticated()){
             return redirect('/');

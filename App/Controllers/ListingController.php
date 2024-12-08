@@ -2,7 +2,9 @@
 
 namespace App\Controllers;
 use Framework\Database;
+use Framework\Session;
 use Framework\Validation;
+use Framework\Authorization;
 
 class ListingController{
 
@@ -18,7 +20,7 @@ class ListingController{
         //inspectAndDie(Validation::email('john@example.com'));
         //inspectAndDie(Validation::match('zayyan','zayyan'));
 
-        $listings = $this->db->query('SELECT * FROM workopia.listings')->fetchAll();
+        $listings = $this->db->query('SELECT * FROM workopia.listings ORDER BY created_at DESC')->fetchAll();
         loadView('listings/index', [
             'listings' => $listings
         ]);
@@ -65,7 +67,7 @@ class ListingController{
 
         $newListingData = array_intersect_key($_POST,array_flip($allowedFields));
 
-        $newListingData['user_id'] = 1;
+        $newListingData['user_id'] = Session::get('user')['id'];
 
         $newListingData = array_map('sanitize', $newListingData);
 
@@ -132,16 +134,24 @@ class ListingController{
      */
     public function destroy($params){
         $id = $params['id'];
+        inspect($id);
 
         $params = [
             'id' => $id
         ];
 
         $listing = $this->db->query('SELECT * FROM workopia.listings WHERE id = :id', $params)->fetch();
+        inspect($listing);
 
         if(!$listing){
             ErrorController::notFound('Listing Not Found');
             return;
+        }
+
+        //Authorization
+        if(!Authorization::isOwner($listing->user_id)){
+            $_SESSION['error_message'] = "You are not authorized to delete this listing";
+            return redirect("/listings/{$listing->id}");
         }
 
         $result = $this->db->query('DELETE FROM workopia.listings WHERE id = :id', $params)->execute();
