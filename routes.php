@@ -22,6 +22,7 @@ $router->get('/auth/register','UserController@create');
 $router->get('/auth/login','UserController@login');
 $router->post('/auth/register', 'UserController@store');
 $router->post('/auth/logout','UserController@logout');
+$router->post('/auth/login','UserController@authenticate');
 
 //Populating the routes array in the $router object 
 // $router->get('/','controllers/home.php');

@@ -9,9 +9,13 @@
         <div class="message bg-green-100 p-3 my-3">
           This is a success message.
         </div> -->
-        <form>
+
+        <!-- Errors -->
+        <?= loadPartial('errors',['errors' => $errors ?? []]) ?>
+
+        <form method="post" action="/auth/login">
             <div class="mb-4">
-                <input type="email" name="email" placeholder="Email Address"
+                <input type="text" name="email" placeholder="Email Address"
                     class="w-full px-4 py-2 border rounded focus:outline-none" />
             </div>
             <div class="mb-4">
