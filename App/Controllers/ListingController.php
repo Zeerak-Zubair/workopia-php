@@ -293,6 +293,37 @@ class ListingController{
 
     }
 
+
+    /**
+     * Find and return listings which match the the provided terms
+     * @return void
+     */
+    public function search($params){
+        $keywords = isset($_GET['keywords']) ? trim($_GET['keywords']) : '';
+        $location = isset($_GET['location']) ? trim($_GET['location']) : '';
+
+        //inspect($keywords);
+
+        $query = "SELECT * FROM workopia.listings WHERE 
+        (title LIKE :keywords OR tags LIKE :keywords OR company LIKE :keywords)
+        AND 
+        (city LIKE :location OR state LIKE :location)"; 
+        $params = [
+            'keywords' => "%{$keywords}%",
+            'location' => "%{$location}%"
+        ];
+
+        $listings = $this->db->query($query,$params)->fetchAll();
+        
+        //inspectAndDie($listings);
+
+        loadView('/listings/index' ,[
+            'listings' => $listings,
+            'keywords' => $keywords,
+            'location' => $location
+        ]);
+    }
+
 }
 
 ?>
